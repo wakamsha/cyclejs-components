@@ -1,0 +1,21 @@
+.timer-gauge {
+  display: flex;
+  align-items: center;
+
+  &__col {
+    flex-float: row nowrap;
+
+    &--progress {
+      width: 100%;
+    }
+  }
+  &__counter {
+    display: inline-block;
+    margin-left: 10px;
+    transition: .3s;
+
+    &--danger {
+      color: red;
+    }
+  }
+}
