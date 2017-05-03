@@ -1,6 +1,6 @@
 # cyclejs-components
 
-[リアクティブ・プログラミングに特化した JS フレームワーク Cycle.js を学ぼう #1 – 導入編 – NET BIZ DIV. TECH BLOG](https://tech.recruit-mp.co.jp/front-end/post-11898/) にて紹介しているサンプルコードです。
+[Cycle.js で本格的なコンポーネント ( タイマーゲージ、モーダルダイアログ ) を作ってみる - Cycle.js を学ぼう #4 – NET BIZ DIV. TECH BLOG](https://tech.recruit-mp.co.jp/front-end/post-11898/) にて紹介しているサンプルコードです。
 
 
 ## Requirement
@@ -23,7 +23,7 @@ $ npm run start
 $ gulp
 ```
 
-起動中は watch 状態となっており、TypeScript ファイルを編集すると自動でコンパイルが実行されてブラウザがリロードします。
+起動中は watch 状態となっており、`.ts`, `.scss`, `.pug` ファイルを編集すると自動でコンパイルが実行されてブラウザがリロードします。
 
 ## Installation
 
