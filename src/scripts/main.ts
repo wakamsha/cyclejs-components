@@ -1,7 +1,8 @@
 import {Observable} from 'rxjs';
-import {VNode, div, label, input, hr, h1, makeDOMDriver} from '@cycle/dom';
+import {VNode, div, makeDOMDriver, button, span, h4} from '@cycle/dom';
 import {DOMSource} from '@cycle/dom/rxjs-typings';
 import {run} from '@cycle/rxjs-run';
+import {BackdropComponent} from './BackdropComponent';
 
 type Sources = {
     DOM: DOMSource;
@@ -12,23 +13,44 @@ type Sinks = {
 }
 
 function main(sources: Sources): Sinks {
-    const input$ = sources.DOM.select('.field').events('input');
-    const name$ = Observable.from(input$)
-        .map((ev: Event) => (ev.target as HTMLInputElement).value)
-        .startWith('');
-    const vdom$ = name$.map(name => {
-        return div('.well', [
-            div('.form-group', [
-                label('Name: '),
-                input('.field.form-control', {attrs: {type: 'text'}})
-            ]),
-            hr(),
-            h1(`Hello ${name}`)
-        ]);
+    const backdrop = BackdropComponent({
+        // DOM: sources.DOM,
+        props: {
+            transclude$: Observable.of(
+                div('.container', [
+                    div('.row', [
+                        div('.col-sm-6.col-sm-offset-3', [
+                            div('.modal-content', [
+                                div('.modal-header', [
+                                    button('#dialog-close.close', [
+                                        span('×')
+                                    ]),
+                                    h4('.modal-title', 'Modal title')
+                                ])
+                            ])
+                        ])
+                    ])
+                ])
+            ),
+            visibility$: Observable.merge(
+                sources.DOM.select('#dialog-open').events('click').mapTo(true),
+                sources.DOM.select('#dialog-close').events('click').mapTo(false)
+            ).startWith(false)
+        }
     });
 
     return {
-        DOM: vdom$
+        DOM: Observable.combineLatest(
+            backdrop.DOM,
+            (backdropDOM) => {
+                return div([
+                    div('.container', [
+                        button('#dialog-open.btn.btn-default', 'Open'),
+                        backdropDOM
+                    ])
+                ])
+            }
+        )
     };
 }
 
