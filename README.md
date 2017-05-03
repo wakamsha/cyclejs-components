@@ -1,6 +1,6 @@
 # cyclejs-components
 
-[Cycle.js で本格的なコンポーネント ( タイマーゲージ、モーダルダイアログ ) を作ってみる - Cycle.js を学ぼう #4 – NET BIZ DIV. TECH BLOG](https://tech.recruit-mp.co.jp/front-end/post-11898/) にて紹介しているサンプルコードです。
+[Cycle.js で本格的なコンポーネント ( タイマーゲージ、モーダルダイアログ ) を作ってみる - Cycle.js を学ぼう #4 – NET BIZ DIV. TECH BLOG](https://tech.recruit-mp.co.jp/front-end/post-12003/) にて紹介しているサンプルコードです。
 
 
 ## Requirement
