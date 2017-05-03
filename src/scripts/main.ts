@@ -56,7 +56,7 @@ function main(sources: Sources): Sinks {
                                     h4('.modal-title', 'Random image')
                                 ]),
                                 div('.modal-body.text-center', [
-                                    img({attrs: {src: 'http://lorempixel.com/480/270/sports/'}})
+                                    img('.img-thumbnail', {attrs: {src: 'http://lorempixel.com/480/270/sports/'}})
                                 ])
                             ])
                         ])
