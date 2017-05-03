@@ -1,11 +1,16 @@
 import {Observable} from 'rxjs';
 import {VNode, div} from '@cycle/dom';
+import isolate from '@cycle/isolate';
 
 type Sources = {
     props: {
         transclude$: Observable<VNode>;
         visibility$: Observable<boolean>;
     }
+}
+
+type Sinks = {
+    DOM: Observable<VNode>;
 }
 
 function render(visible: boolean, transclude: VNode): VNode {
@@ -18,7 +23,7 @@ function render(visible: boolean, transclude: VNode): VNode {
     ]);
 }
 
-export function BackdropComponent({props}: Sources) {
+function Component({props}: Sources): Sinks {
     const view$: Observable<VNode> = Observable.combineLatest(
         props.visibility$.startWith(false),
         props.transclude$,
@@ -28,4 +33,8 @@ export function BackdropComponent({props}: Sources) {
     return {
         DOM: view$
     };
+}
+
+export function BackdropComponent({props}: Sources): Sinks {
+    return isolate(Component)({props});
 }
