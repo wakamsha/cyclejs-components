@@ -2,7 +2,6 @@ import {Observable} from 'rxjs';
 import {VNode, div} from '@cycle/dom';
 
 type Sources = {
-    // DOM: DOMSource;
     props: {
         transclude$: Observable<VNode>;
         visibility$: Observable<boolean>;
