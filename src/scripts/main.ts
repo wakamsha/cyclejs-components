@@ -72,7 +72,7 @@ function main(sources: Sources): Sinks {
 
     const countdownTimer = CountdownTimerComponent({
         props: {
-            maxTime$: Observable.of(10000),
+            maxTime$: Observable.of(5000),
             alertTime: 3000,
             active$: Observable.merge(
                 sources.DOM.select('#timer-gauge-play').events('click').mapTo(true),
