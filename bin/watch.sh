@@ -16,7 +16,7 @@ pug_pid=$!
 trap "kill -15 $pug_pid &>/dev/null" 2 15
 
 # Compile SCSS sources
-nohup node-sass src/styles -o public/ -w &
+nohup node-sass src/styles -o public/ --source-map true -w &
 sass_pid=$!
 trap "kill -15 $sass_pid &>/dev/null" 2 15
 

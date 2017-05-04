@@ -14,12 +14,12 @@ type Sinks = {
 }
 
 function render(visible: boolean, transclude: VNode): VNode {
-    return div('.backdrop', {
+    return div('.modal', {
         class: {
-            'backdrop--visible': visible
+            'modal--visible': visible
         }
     }, [
-        div('.backdrop__content', [visible ? transclude : null])
+        div('.modal__content', [visible ? transclude : null])
     ]);
 }
 
@@ -35,6 +35,6 @@ function Component({props}: Sources): Sinks {
     };
 }
 
-export function BackdropComponent({props}: Sources): Sinks {
+export function ModalComponent({props}: Sources): Sinks {
     return isolate(Component)({props});
 }

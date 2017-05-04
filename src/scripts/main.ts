@@ -2,7 +2,7 @@ import {Observable} from 'rxjs';
 import {VNode, div, makeDOMDriver, button, span, h4, h2, hr, pre, code, p, img} from '@cycle/dom';
 import {DOMSource} from '@cycle/dom/rxjs-typings';
 import {run} from '@cycle/rxjs-run';
-import {BackdropComponent} from './BackdropComponent';
+import {ModalComponent} from './ModalComponent';
 import {TimerGaugeComponent} from './TimerGaugeComponent';
 
 type Sources = {
@@ -14,20 +14,20 @@ type Sinks = {
 }
 
 function main(sources: Sources): Sinks {
-    const backdrop1 = BackdropComponent({
+    const modal1 = ModalComponent({
         props: {
             transclude$: Observable.of(
                 div('.container', [
                     div('.row', [
                         div('.col-sm-6.col-sm-offset-3', [
-                            div('.modal-content', [
-                                div('.modal-header', [
+                            div('.panel.panel-default', [
+                                div('.panel-heading', [
                                     button('#dialog-close1.close', [
                                         span('×')
                                     ]),
-                                    h4('.modal-title', 'Dummy text')
+                                    h4('.panel-title', 'Dummy text')
                                 ]),
-                                div('.modal-body', [
+                                div('.panel-body', [
                                     p('Vivamus suscipit tortor eget felis porttitor volutpat. Donec sollicitudin molestie malesuada. Curabitur arcu erat, accumsan id imperdiet et, porttitor at sem. Curabitur non nulla sit amet nisl tempus convallis quis ac lectus.')
                                 ])
                             ])
@@ -42,20 +42,20 @@ function main(sources: Sources): Sinks {
         }
     });
 
-    const backdrop2 = BackdropComponent({
+    const modal2 = ModalComponent({
         props: {
             transclude$: Observable.of(
                 div('.container', [
                     div('.row', [
                         div('.col-sm-6.col-sm-offset-3', [
-                            div('.modal-content', [
-                                div('.modal-header', [
+                            div('.panel.panel-primary', [
+                                div('.panel-heading', [
                                     button('#dialog-close2.close', [
                                         span('×')
                                     ]),
-                                    h4('.modal-title', 'Random image')
+                                    h4('.panel-title', 'Random image')
                                 ]),
-                                div('.modal-body.text-center', [
+                                div('.panel-body.text-center', [
                                     img('.img-thumbnail', {attrs: {src: 'http://lorempixel.com/480/270/sports/'}})
                                 ])
                             ])
@@ -84,21 +84,21 @@ function main(sources: Sources): Sinks {
 
     return {
         DOM: Observable.combineLatest(
-            backdrop1.DOM,
-            backdrop2.DOM,
+            modal1.DOM,
+            modal2.DOM,
             timerGauge.DOM,
             timerGauge.timeSpent$,
             timerGauge.isActive$,
-            (backdropDOM1, backdropDOM2, timerGaugeDOM, timeSpent, isActive) => {
+            (modalDOM1, modalDOM2, timerGaugeDOM, timeSpent, isActive) => {
                 return div('.container', [
-                    h2('.page-header', 'Backdrop'),
+                    h2('.page-header', 'Modal'),
                     div([
                         div('.btn-group', [
                             button('#dialog-open1.btn.btn-default', 'Open 1'),
                             button('#dialog-open2.btn.btn-default', 'Open 2'),
                         ]),
-                        backdropDOM1,
-                        backdropDOM2,
+                        modalDOM1,
+                        modalDOM2,
                     ]),
                     h2('.page-header', 'Timer Gauge'),
                     div('.row', [
