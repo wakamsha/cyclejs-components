@@ -4,7 +4,7 @@ import isolate from '@cycle/isolate';
 
 type Sources = {
     props: {
-        transclude$: Observable<VNode>;
+        content$: Observable<VNode>;
         visibility$: Observable<boolean>;
     }
 }
@@ -26,7 +26,7 @@ function render(visible: boolean, transclude: VNode): VNode {
 function Component({props}: Sources): Sinks {
     const view$: Observable<VNode> = Observable.combineLatest(
         props.visibility$.startWith(false),
-        props.transclude$,
+        props.content$,
         (visible, transclude) => render(visible, transclude)
     );
 

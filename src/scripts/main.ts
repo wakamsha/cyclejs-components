@@ -16,7 +16,7 @@ type Sinks = {
 function main(sources: Sources): Sinks {
     const modal1 = ModalComponent({
         props: {
-            transclude$: Observable.of(
+            content$: Observable.of(
                 div('.container', [
                     div('.row', [
                         div('.col-sm-6.col-sm-offset-3', [
@@ -44,7 +44,7 @@ function main(sources: Sources): Sinks {
 
     const modal2 = ModalComponent({
         props: {
-            transclude$: Observable.of(
+            content$: Observable.of(
                 div('.container', [
                     div('.row', [
                         div('.col-sm-6.col-sm-offset-3', [
