@@ -2,8 +2,8 @@ import {Observable} from 'rxjs';
 import {VNode, div, makeDOMDriver, button, span, h4, h2, hr, pre, code, p, img} from '@cycle/dom';
 import {DOMSource} from '@cycle/dom/rxjs-typings';
 import {run} from '@cycle/rxjs-run';
-import {ModalComponent} from './ModalComponent';
-import {CountdownTimerComponent} from './CountdownTimerComponent';
+import {ModalComponent} from './components/ModalComponent';
+import {CountdownTimerComponent} from './components/CountdownTimerComponent';
 
 type Sources = {
     DOM: DOMSource;
