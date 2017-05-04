@@ -58,8 +58,8 @@ function render({maxTime, time, alertTime}: {alertTime: number, maxTime: number,
     const ratio = time / maxTime;
     const isAlert = time < alertTime;
 
-    return div('.timer-gauge', [
-        div('.timer-gauge__col.timer-gauge__col--progress', [
+    return div('.countdown-timer', [
+        div('.countdown-timer__col.countdown-timer__col--progress', [
             div('.progress', [
                 div('.progress-bar', {
                     style: {width: `${ratio * 100}%`},
@@ -69,17 +69,17 @@ function render({maxTime, time, alertTime}: {alertTime: number, maxTime: number,
                 })
             ])
         ]),
-        div('.timer-gauge__col', [
-            span('.timer-gauge__counter', {
+        div('.countdown-timer__col', [
+            span('.countdown-timer__counter', {
                 class: {
-                    'timer-gauge__counter--danger': isAlert
+                    'countdown-timer__counter--danger': isAlert
                 }
             }, `${min}:${sec}:${msec}`)
         ])
     ]);
 }
 
-export function TimerGaugeComponent({props}: Sources): Sinks {
+export function CountdownTimerComponent({props}: Sources): Sinks {
     const active$ = props.active$;
 
     const model$ = Observable.merge(
@@ -115,9 +115,9 @@ export function TimerGaugeComponent({props}: Sources): Sinks {
         ({time, maxTime}): VNode => render({maxTime, time, alertTime: props.alertTime})
     );
 
-    return {
+    return <Sinks>{
         isActive$: model$.map((state: State): boolean => state.isPlaying),
         timeSpent$: model$.map((state: State): number => state.timeSpent / 1000),
-        DOM: <Observable<VNode>>vdom$
+        DOM: vdom$
     }
 }

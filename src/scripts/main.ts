@@ -3,7 +3,7 @@ import {VNode, div, makeDOMDriver, button, span, h4, h2, hr, pre, code, p, img} 
 import {DOMSource} from '@cycle/dom/rxjs-typings';
 import {run} from '@cycle/rxjs-run';
 import {ModalComponent} from './ModalComponent';
-import {TimerGaugeComponent} from './TimerGaugeComponent';
+import {CountdownTimerComponent} from './CountdownTimerComponent';
 
 type Sources = {
     DOM: DOMSource;
@@ -70,7 +70,7 @@ function main(sources: Sources): Sinks {
         }
     });
 
-    const timerGauge = TimerGaugeComponent({
+    const countdownTimer = CountdownTimerComponent({
         props: {
             maxTime$: Observable.of(10000),
             alertTime: 3000,
@@ -86,9 +86,9 @@ function main(sources: Sources): Sinks {
         DOM: Observable.combineLatest(
             modal1.DOM,
             modal2.DOM,
-            timerGauge.DOM,
-            timerGauge.timeSpent$,
-            timerGauge.isActive$,
+            countdownTimer.DOM,
+            countdownTimer.timeSpent$,
+            countdownTimer.isActive$,
             (modalDOM1, modalDOM2, timerGaugeDOM, timeSpent, isActive) => {
                 return div('.container', [
                     h2('.page-header', 'Modal'),
@@ -100,7 +100,7 @@ function main(sources: Sources): Sinks {
                         modalDOM1,
                         modalDOM2,
                     ]),
-                    h2('.page-header', 'Timer Gauge'),
+                    h2('.page-header', 'Countdown Timer'),
                     div('.row', [
                         div('.col-sm-6', [
                             timerGaugeDOM,
